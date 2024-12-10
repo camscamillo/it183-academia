@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Blog List{% endblock %}
+
+{% block content %}
+<h1>Cams Blog List</h1>
+<ul class="blog-list">
+    {% for list in blog_list %}
+    <li>
+        <!-- Hidden Checkbox for content toggle -->
+        <input type="checkbox" id="toggle-{{ list.id }}" class="toggle-checkbox">
+
+        <!-- Label to make the entire box clickable -->
+        <a href="{% url 'blog_detail' list.id %}" class="blog-item-label">
+            <div class="content-summary">
+                <span><strong>TITLE:</strong> {{ list.title }}</span>
+            </div>
+        </a>
+
+        <!-- Content that is hidden by default -->
+        <div class="content">
+            <span>{{ list.content }}</span>
+        </div>
+
+        <!-- Action links (Update & Delete) -->
+        <div class="actions">
+            <a href="{{ list.id }}/update/">Update</a>
+            <a href="{{ list.id }}/delete/">Delete</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
